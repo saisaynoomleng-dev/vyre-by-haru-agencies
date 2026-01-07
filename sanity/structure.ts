@@ -30,6 +30,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('award').title('Awards').icon(CiTrophy),
       S.documentTypeListItem('faq').title('FAQs').icon(FaQuestion),
       S.documentTypeListItem('milestone').title('Milestones').icon(GoMilestone),
+      S.documentTypeListItem('utilityPage').title('Utility Pages'),
 
       S.divider().title('Services'),
       S.documentTypeListItem('service')

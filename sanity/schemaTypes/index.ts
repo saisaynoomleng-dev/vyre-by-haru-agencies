@@ -13,6 +13,7 @@ import { newsletterType } from './newsletterType';
 import { contactType } from './contactType';
 import { milestoneType } from './milestoneType';
 import { categoryType } from './categoryType';
+import { utilityPageType } from './utilityPages';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -30,5 +31,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactType,
     milestoneType,
     categoryType,
+    utilityPageType,
   ],
 };

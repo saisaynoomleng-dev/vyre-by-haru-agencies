@@ -172,3 +172,10 @@ export const ALL_MILESTONES_QUERY = defineQuery(`*[_type == 'milestone'
   year,
   desc
  }`);
+
+export const UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'utilityPage'
+ && slug.current == $slug][0]{
+  name,
+  slug,
+  desc
+ }`);

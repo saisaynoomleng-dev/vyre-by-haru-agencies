@@ -13,6 +13,58 @@
  */
 
 // Source: schema.json
+export type UtilityPage = {
+  _id: string;
+  _type: 'utilityPage';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  desc?: BlockContent;
+};
+
+export type BlockContent = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: 'span';
+        _key: string;
+      }>;
+      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
+      listItem?: 'bullet';
+      markDefs?: Array<{
+        href?: string;
+        _type: 'link';
+        _key: string;
+      }>;
+      level?: number;
+      _type: 'block';
+      _key: string;
+    }
+  | {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: 'image';
+      _key: string;
+    }
+>;
+
+export type Slug = {
+  _type: 'slug';
+  current?: string;
+  source?: string;
+};
+
 export type Milestone = {
   _id: string;
   _type: 'milestone';
@@ -23,12 +75,6 @@ export type Milestone = {
   slug?: Slug;
   year?: string;
   desc?: string;
-};
-
-export type Slug = {
-  _type: 'slug';
-  current?: string;
-  source?: string;
 };
 
 export type Contact = {
@@ -108,41 +154,6 @@ export type Service = {
   mainImage?: BlockImage;
   desc?: BlockContent;
 };
-
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: 'span';
-        _key: string;
-      }>;
-      style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
-      listItem?: 'bullet';
-      markDefs?: Array<{
-        href?: string;
-        _type: 'link';
-        _key: string;
-      }>;
-      level?: number;
-      _type: 'block';
-      _key: string;
-    }
-  | {
-      asset?: {
-        _ref: string;
-        _type: 'reference';
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: 'image';
-      _key: string;
-    }
->;
 
 export type Award = {
   _id: string;
@@ -345,15 +356,16 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | Milestone
+  | UtilityPage
+  | BlockContent
   | Slug
+  | Milestone
   | Contact
   | Newsletter
   | Faq
   | Review
   | BlockImage
   | Service
-  | BlockContent
   | Award
   | TeamMember
   | Project
@@ -575,6 +587,13 @@ export type ALL_MILESTONES_QUERYResult = Array<{
   year: string | null;
   desc: string | null;
 }>;
+// Variable: UTILITY_PAGE_QUERY
+// Query: *[_type == 'utilityPage' && slug.current == $slug][0]{  name,  slug,  desc }
+export type UTILITY_PAGE_QUERYResult = {
+  name: string | null;
+  slug: Slug | null;
+  desc: BlockContent | null;
+} | null;
 
 // Query TypeMap
 import '@sanity/client';
@@ -593,5 +612,6 @@ declare module '@sanity/client' {
     "*[_type == 'review']{\n  fullName,\n  role,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  title\n }": ALL_REVIEWS_QUERYResult;
     "*[_type == 'faq']{\n  question,\n  answer\n}": ALL_FAQS_QUERYResult;
     "*[_type == 'milestone'\n && defined(slug.current)]{\n  title,\n  slug,\n  year,\n  desc\n }": ALL_MILESTONES_QUERYResult;
+    "*[_type == 'utilityPage'\n && slug.current == $slug][0]{\n  name,\n  slug,\n  desc\n }": UTILITY_PAGE_QUERYResult;
   }
 }
