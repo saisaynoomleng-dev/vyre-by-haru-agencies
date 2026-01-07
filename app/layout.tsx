@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     default: 'VYRE',
   },
   description:
-    'VYRE BY HARU AGENCIES is a UI/UX design studio based in Cleveland, Ohio.We design and build modern digital experiences with clarity, purpose, and restraint.',
+    'VYRE BY HARU AGENCIES is a UI/UX design studio based in kingdom of Atlantica.We design and build modern digital experiences with clarity, purpose, and restraint.',
 };
 
 export default function RootLayout({
