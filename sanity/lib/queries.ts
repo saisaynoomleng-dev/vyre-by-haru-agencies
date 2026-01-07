@@ -59,7 +59,7 @@ export const AUTHOR_QUERY = defineQuery(`*[_type == 'author'
 
 export const ALL_PROJECTS_QUERY = defineQuery(`*[_type == 'project'
  && defined(slug.current)]{
-  title,
+  name,
   slug,
   finishedAt,
   scope,
@@ -94,6 +94,18 @@ export const PROJECT_QUERY = defineQuery(`*[_type == 'project'
 
 export const ALL_TEAM_MEMBERS_QUERY = defineQuery(`*[_type == 'teamMember'
  && defined(slug.current)]{
+  fullName,
+  role,
+  slug,
+  mainImage{
+    alt,
+    asset->{url}
+  },
+  bio
+ }`);
+
+export const TEAM_MEMBER_QUERY = defineQuery(`*[_type == 'teamMember'
+ && slug.current == $slug][0]{
   fullName,
   role,
   slug,

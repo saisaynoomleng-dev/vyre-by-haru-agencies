@@ -440,9 +440,9 @@ export type AUTHOR_QUERYResult = {
   slug: Slug | null;
 } | null;
 // Variable: ALL_PROJECTS_QUERY
-// Query: *[_type == 'project' && defined(slug.current)]{  title,  slug,  finishedAt,  scope,  timeline,  mainImage{    alt,    asset->{url}  },  logoImage{    alt,    asset->{url}  } }
+// Query: *[_type == 'project' && defined(slug.current)]{  name,  slug,  finishedAt,  scope,  timeline,  mainImage{    alt,    asset->{url}  },  logoImage{    alt,    asset->{url}  } }
 export type ALL_PROJECTS_QUERYResult = Array<{
-  title: null;
+  name: string | null;
   slug: Slug | null;
   finishedAt: string | null;
   scope: string | null;
@@ -496,6 +496,20 @@ export type ALL_TEAM_MEMBERS_QUERYResult = Array<{
   } | null;
   bio: string | null;
 }>;
+// Variable: TEAM_MEMBER_QUERY
+// Query: *[_type == 'teamMember' && slug.current == $slug][0]{  fullName,  role,  slug,  mainImage{    alt,    asset->{url}  },  bio }
+export type TEAM_MEMBER_QUERYResult = {
+  fullName: string | null;
+  role: string | null;
+  slug: Slug | null;
+  mainImage: {
+    alt: string | null;
+    asset: {
+      url: string | null;
+    } | null;
+  } | null;
+  bio: string | null;
+} | null;
 // Variable: ALL_AWARDS_QUERY
 // Query: *[_type == 'award' && defined(slug.current)]{  awardedTitle,  awardedDate,  slug,  awardedCategory }
 export type ALL_AWARDS_QUERYResult = Array<{
@@ -569,9 +583,10 @@ declare module '@sanity/client' {
     "*[_type == 'blog'\n && defined(slug.current)]{\n  title,\n  slug,\n  publishedAt,\n  author->{\n    name,\n    slug,\n    mainImage{\n        alt,\n        asset->{url}\n    }\n  },\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  category->{\n    name\n  }\n }": ALL_BLOGS_QUERYResult;
     "*[_type == 'blog'\n && slug.current == $slug][0]{\n  title,\n  slug,\n  publishedAt,\n  author->{\n    name,\n    slug,\n    mainImage{\n        alt,\n        asset->{url}\n    }\n  },\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  category->{\n    name\n  }\n }": BLOG_QUERYResult;
     "*[_type == 'author'\n && slug.current == $slug][0]{\n  name,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio,\n  slug\n }": AUTHOR_QUERYResult;
-    "*[_type == 'project'\n && defined(slug.current)]{\n  title,\n  slug,\n  finishedAt,\n  scope,\n  timeline,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  logoImage{\n    alt,\n    asset->{url}\n  }\n }": ALL_PROJECTS_QUERYResult;
+    "*[_type == 'project'\n && defined(slug.current)]{\n  name,\n  slug,\n  finishedAt,\n  scope,\n  timeline,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  logoImage{\n    alt,\n    asset->{url}\n  }\n }": ALL_PROJECTS_QUERYResult;
     "*[_type == 'project'\n && slug.current ==  $slug][0]{\n  title,\n  slug,\n  finishedAt,\n  scope,\n  timeline,\n  desc,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  logoImage{\n    alt,\n    asset->{url}\n  }\n }": PROJECT_QUERYResult;
     "*[_type == 'teamMember'\n && defined(slug.current)]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": ALL_TEAM_MEMBERS_QUERYResult;
+    "*[_type == 'teamMember'\n && slug.current == $slug][0]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": TEAM_MEMBER_QUERYResult;
     "*[_type == 'award'\n && defined(slug.current)]{\n  awardedTitle,\n  awardedDate,\n  slug,\n  awardedCategory\n }": ALL_AWARDS_QUERYResult;
     "*[_type == 'service'\n && defined(slug.current)]{\n  title,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n }": ALL_SERVICES_QUERYResult;
     "*[_type == 'service'\n && slug.current == $slug][0]{\n  title,\n  slug,\n  desc,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n }": SERVICE_QUERYResult;
