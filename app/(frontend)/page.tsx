@@ -1,5 +1,6 @@
 import AwardCard from '@/components/AwardCard';
 import BlogCard from '@/components/BlogCard';
+import Bounded from '@/components/Bounded';
 import FAQ from '@/components/FAQ';
 import MemberCard from '@/components/MemberCard';
 import ProjectCard from '@/components/ProjectCard';
@@ -26,7 +27,7 @@ import {
 export default async function Home() {
   const { data: blogs } = await sanityFetch({ query: ALL_REVIEWS_QUERY });
   return (
-    <div>
+    <Bounded>
       <Button>Click me</Button>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam ipsam
@@ -40,6 +41,6 @@ export default async function Home() {
       </div> */}
 
       <FAQ />
-    </div>
+    </Bounded>
   );
 }

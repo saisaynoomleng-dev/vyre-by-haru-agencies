@@ -17,3 +17,10 @@ export type SubmitButtonProps = {
   className?: string;
   children?: React.ReactNode;
 };
+
+// Previous Newsletter form state
+export type PreviousNewsletterFormState = {
+  status: string;
+  message: string;
+  field?: string;
+};

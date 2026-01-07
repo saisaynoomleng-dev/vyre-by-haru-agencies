@@ -7,54 +7,38 @@ const LoadingDot = () => {
         height="32"
         viewBox="0 0 24 24"
       >
-        <circle cx="4" cy="12" r="0" fill="currentColor">
+        {/* Icon from SVG Spinners by Utkarsh Verma */}
+        <circle cx="4" cy="12" r="3" fill="currentColor">
           <animate
+            id="SVG7x14Dcom"
             fill="freeze"
-            attributeName="r"
-            begin="0;SVGUppsBdVN.end"
-            calcMode="spline"
-            dur="0.5s"
-            keySplines=".36,.6,.31,1"
-            values="0;3"
-          />
-          <animate
-            fill="freeze"
-            attributeName="cx"
-            begin="SVGqCgsydxJ.end"
-            calcMode="spline"
-            dur="0.5s"
-            keySplines=".36,.6,.31,1"
-            values="4;12"
-          />
-          <animate
-            fill="freeze"
-            attributeName="cx"
-            begin="SVG3PwDNd6F.end"
-            calcMode="spline"
-            dur="0.5s"
-            keySplines=".36,.6,.31,1"
-            values="12;20"
-          />
-          <animate
-            id="SVG3V8yEdYE"
-            fill="freeze"
-            attributeName="r"
-            begin="SVG6wCQhd9Q.end"
-            calcMode="spline"
-            dur="0.5s"
-            keySplines=".36,.6,.31,1"
-            values="3;0"
-          />
-          <animate
-            id="SVGUppsBdVN"
-            fill="freeze"
-            attributeName="cx"
-            begin="SVG3V8yEdYE.end"
-            dur="0.001s"
-            values="20;4"
+            attributeName="opacity"
+            begin="0;SVGqSjG0dUp.end-0.25s"
+            dur="0.75s"
+            values="1;.2"
           />
         </circle>
-        {/* rest unchanged */}
+
+        <circle cx="12" cy="12" r="3" fill="currentColor" opacity=".4">
+          <animate
+            fill="freeze"
+            attributeName="opacity"
+            begin="SVG7x14Dcom.begin+0.15s"
+            dur="0.75s"
+            values="1;.2"
+          />
+        </circle>
+
+        <circle cx="20" cy="12" r="3" fill="currentColor" opacity=".3">
+          <animate
+            id="SVGqSjG0dUp"
+            fill="freeze"
+            attributeName="opacity"
+            begin="SVG7x14Dcom.begin+0.3s"
+            dur="0.75s"
+            values="1;.2"
+          />
+        </circle>
       </svg>
     </div>
   );
