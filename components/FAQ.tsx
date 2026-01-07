@@ -17,7 +17,7 @@ const FAQ = async () => {
       <div>
         <Accordion type="single" collapsible className="w-full">
           {FAQs.map((faq, i) => (
-            <AccordionItem value={`${i}`}>
+            <AccordionItem key={i} value={`${i}`}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
               <AccordionContent>{faq.answer}</AccordionContent>
             </AccordionItem>
