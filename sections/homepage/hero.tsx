@@ -1,4 +1,5 @@
 import { MarqueeAnimation } from '@/components/Animations';
+import SocialLinks from '@/components/SocialLinks';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -44,19 +45,7 @@ const HeroSection = () => {
         </p>
       </div>
 
-      <div className="flex justify-end gap-2 items-center text-fs-300">
-        <Link href="https://www.behance.com/" className="underline">
-          BE
-        </Link>
-        {'/'}
-        <Link href="https://www.dribble.com/" className="underline">
-          DR
-        </Link>
-        {'/'}
-        <Link href="https://www.github.com/" className="underline">
-          GH
-        </Link>
-      </div>
+      <SocialLinks />
 
       <MarqueeAnimation duration={20} direction="left" className="max-w-screen">
         <div className="flex gap-x-3 min-w-max">
