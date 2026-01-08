@@ -470,11 +470,11 @@
             },
             {
               "type": "string",
-              "value": "graphic_design"
+              "value": "ux_strategy"
             },
             {
               "type": "string",
-              "value": "logo_design"
+              "value": "design_strategy"
             },
             {
               "type": "string",
@@ -482,7 +482,27 @@
             },
             {
               "type": "string",
-              "value": "app_design"
+              "value": "frontend_development"
+            },
+            {
+              "type": "string",
+              "value": "website_redesign"
+            },
+            {
+              "type": "string",
+              "value": "product_strategy"
+            },
+            {
+              "type": "string",
+              "value": "content_and_information_architecture"
+            },
+            {
+              "type": "string",
+              "value": "motion_and_interaction_design"
+            },
+            {
+              "type": "string",
+              "value": "studio_partnership"
             }
           ]
         },

@@ -25,6 +25,20 @@ export type PreviousFormStateProps = {
   field?: string;
 };
 
+// Section Title
+export type SectionTitleProps = {
+  as?: React.ElementType;
+  className?: string;
+  children: React.ReactNode;
+};
+
+// Back to Page Button
+export type BackToPageProps = {
+  url: string;
+  className?: string;
+  children: React.ReactNode;
+};
+
 /** Animations */
 // Marquee Animation Props
 export type MarqueeAnimationProps = {
