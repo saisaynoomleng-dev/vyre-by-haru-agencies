@@ -1,27 +1,30 @@
 import { defineQuery } from 'next-sanity';
 
-export const ALL_BLOGS_QUERY = defineQuery(`*[_type == 'blog'
- && defined(slug.current)]{
-  title,
-  slug,
-  publishedAt,
-  author->{
-    name,
-    slug,
-    mainImage{
-        alt,
-        asset->{url}
-    }
-  },
-  mainImage{
-    alt,
-    asset->{url}
-  },
-  desc,
-  category->{
-    name
-  }
- }`);
+export const ALL_BLOGS_QUERY = defineQuery(`{"blogs": *[_type == 'blog'
+          && defined(slug.current)]
+          | order(publishedAt desc)
+          [$startIndex...$endIndex]{
+            title,
+            slug,
+            publishedAt,
+            author->{
+              name,
+              slug,
+              mainImage{
+                alt,
+                asset->{url}
+              }
+            },
+            mainImage{
+              alt,
+              asset->{url}
+            },
+            category->{
+              name,
+            },
+            },
+        "total": count(*[_type == 'blog'
+                && defined(slug.current)])}`);
 
 export const BLOG_QUERY = defineQuery(`*[_type == 'blog'
  && slug.current == $slug][0]{

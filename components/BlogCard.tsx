@@ -3,12 +3,14 @@ import Link from 'next/link';
 import SanityImage from './SanityImage';
 import { formatDate } from '@/lib/utils';
 
-const BlogCard = (props: NonNullable<ALL_BLOGS_QUERYResult[number]>) => {
+const BlogCard = (
+  props: NonNullable<ALL_BLOGS_QUERYResult['blogs'][number]>,
+) => {
   const { title, slug, publishedAt, author, mainImage, category } = props;
   return (
     <Link
       href={`/blog/${slug?.current}`}
-      className="rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150"
+      className="rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 mx-auto"
     >
       <div className="overflow-hidden group relative">
         {mainImage?.asset?.url && mainImage.alt ? (

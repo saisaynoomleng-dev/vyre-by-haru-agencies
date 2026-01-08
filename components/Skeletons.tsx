@@ -3,7 +3,7 @@ import { Skeleton } from './ui/skeleton';
 // Blog Card
 export const BlogCardSkeleton = () => {
   return (
-    <div className="max-w-100 lg:max-h-150 flex flex-col gap-y-2 rounded-2xl shadow-sm shadow-brand-black/10">
+    <div className="max-w-100 lg:max-h-150 flex flex-col gap-y-2 rounded-2xl shadow-sm shadow-brand-black/10 mx-auto">
       <div>
         <Skeleton className="w-100 h-125" />
       </div>

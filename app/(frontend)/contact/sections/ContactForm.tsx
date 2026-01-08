@@ -63,6 +63,7 @@ const ContactForm = ({ className }: { className?: string }) => {
           id="contactName"
           name="contactName"
           autoComplete="name"
+          required
         />
         {state.status === 'error' && state.field === 'contactName' && (
           <p className="form-error-message">{state.message}</p>
@@ -78,6 +79,7 @@ const ContactForm = ({ className }: { className?: string }) => {
           id="contactEmail"
           name="contactEmail"
           autoComplete="email"
+          required
         />
         {state.status === 'error' && state.field === 'contactEmail' && (
           <p className="form-error-message">{state.message}</p>
@@ -89,7 +91,7 @@ const ContactForm = ({ className }: { className?: string }) => {
           Scope
         </label>
 
-        <Select value={scope} onValueChange={setScope}>
+        <Select value={scope} onValueChange={setScope} required>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a scope" />
           </SelectTrigger>
@@ -117,7 +119,7 @@ const ContactForm = ({ className }: { className?: string }) => {
         <label htmlFor="message" className="form-label">
           Message
         </label>
-        <Textarea id="message" name="message"></Textarea>
+        <Textarea id="message" name="message" required></Textarea>
         {state.status === 'error' && state.field === 'message' && (
           <p className="form-error-message">{state.message}</p>
         )}

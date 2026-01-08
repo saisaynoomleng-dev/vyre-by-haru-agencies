@@ -87,10 +87,15 @@ export type Contact = {
   email?: string;
   scope?:
     | 'ui_ux'
-    | 'graphic_design'
-    | 'logo_design'
+    | 'ux_strategy'
+    | 'design_strategy'
     | 'web_design'
-    | 'app_design';
+    | 'frontend_development'
+    | 'website_redesign'
+    | 'product_strategy'
+    | 'content_and_information_architecture'
+    | 'motion_and_interaction_design'
+    | 'studio_partnership';
   message?: string;
 };
 
@@ -385,32 +390,34 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/lib/queries.ts
 // Variable: ALL_BLOGS_QUERY
-// Query: *[_type == 'blog' && defined(slug.current)]{  title,  slug,  publishedAt,  author->{    name,    slug,    mainImage{        alt,        asset->{url}    }  },  mainImage{    alt,    asset->{url}  },  desc,  category->{    name  } }
-export type ALL_BLOGS_QUERYResult = Array<{
-  title: string | null;
-  slug: Slug | null;
-  publishedAt: string | null;
-  author: {
-    name: string | null;
+// Query: {"blogs": *[_type == 'blog'          && defined(slug.current)]          | order(publishedAt desc)          [$startIndex...$endIndex]{            title,            slug,            publishedAt,            author->{              name,              slug,              mainImage{                alt,                asset->{url}              }            },            mainImage{              alt,              asset->{url}            },            category->{              name,            },            },        "total": count(*[_type == 'blog'                && defined(slug.current)])}
+export type ALL_BLOGS_QUERYResult = {
+  blogs: Array<{
+    title: string | null;
     slug: Slug | null;
+    publishedAt: string | null;
+    author: {
+      name: string | null;
+      slug: Slug | null;
+      mainImage: {
+        alt: string | null;
+        asset: {
+          url: string | null;
+        } | null;
+      } | null;
+    } | null;
     mainImage: {
       alt: string | null;
       asset: {
         url: string | null;
       } | null;
     } | null;
-  } | null;
-  mainImage: {
-    alt: string | null;
-    asset: {
-      url: string | null;
+    category: {
+      name: string | null;
     } | null;
-  } | null;
-  desc: BlockContent | null;
-  category: {
-    name: string | null;
-  } | null;
-}>;
+  }>;
+  total: number;
+};
 // Variable: BLOG_QUERY
 // Query: *[_type == 'blog' && slug.current == $slug][0]{  title,  slug,  publishedAt,  author->{    name,    slug,    mainImage{        alt,        asset->{url}    }  },  mainImage{    alt,    asset->{url}  },  desc,  category->{    name  } }
 export type BLOG_QUERYResult = {
@@ -599,7 +606,7 @@ export type UTILITY_PAGE_QUERYResult = {
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == 'blog'\n && defined(slug.current)]{\n  title,\n  slug,\n  publishedAt,\n  author->{\n    name,\n    slug,\n    mainImage{\n        alt,\n        asset->{url}\n    }\n  },\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  category->{\n    name\n  }\n }": ALL_BLOGS_QUERYResult;
+    '{"blogs": *[_type == \'blog\'\n          && defined(slug.current)]\n          | order(publishedAt desc)\n          [$startIndex...$endIndex]{\n            title,\n            slug,\n            publishedAt,\n            author->{\n              name,\n              slug,\n              mainImage{\n                alt,\n                asset->{url}\n              }\n            },\n            mainImage{\n              alt,\n              asset->{url}\n            },\n            category->{\n              name,\n            },\n            },\n        "total": count(*[_type == \'blog\'\n                && defined(slug.current)])}': ALL_BLOGS_QUERYResult;
     "*[_type == 'blog'\n && slug.current == $slug][0]{\n  title,\n  slug,\n  publishedAt,\n  author->{\n    name,\n    slug,\n    mainImage{\n        alt,\n        asset->{url}\n    }\n  },\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  category->{\n    name\n  }\n }": BLOG_QUERYResult;
     "*[_type == 'author'\n && slug.current == $slug][0]{\n  name,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio,\n  slug\n }": AUTHOR_QUERYResult;
     "*[_type == 'project'\n && defined(slug.current)]{\n  name,\n  slug,\n  finishedAt,\n  scope,\n  timeline,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  logoImage{\n    alt,\n    asset->{url}\n  }\n }": ALL_PROJECTS_QUERYResult;
