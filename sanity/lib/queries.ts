@@ -22,9 +22,10 @@ export const ALL_BLOGS_QUERY = defineQuery(`{"blogs": *[_type == 'blog'
             category->{
               name,
             },
-            },
+          },
         "total": count(*[_type == 'blog'
-                && defined(slug.current)])}`);
+                && defined(slug.current)]),
+}`);
 
 export const BLOG_QUERY = defineQuery(`*[_type == 'blog'
  && slug.current == $slug][0]{
@@ -46,7 +47,29 @@ export const BLOG_QUERY = defineQuery(`*[_type == 'blog'
   desc,
   category->{
     name
-  }
+  },
+  "relatedPosts": *[_type == 'blog' 
+                        && category._ref == ^.category._ref
+                        && _id != ^._id]{
+                          title,
+                          slug,
+                          publishedAt,
+                          author->{
+                            name,
+                            slug,
+                            mainImage{
+                              alt,
+                              asset->{url}
+                            }
+                          },
+                          mainImage{
+                            alt,
+                            asset->{url}
+                          },
+                          category->{
+                            name,
+                          },
+                        }
  }`);
 
 export const AUTHOR_QUERY = defineQuery(`*[_type == 'author'

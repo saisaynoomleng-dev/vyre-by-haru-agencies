@@ -2,15 +2,18 @@ import { ALL_BLOGS_QUERYResult } from '@/sanity/types';
 import Link from 'next/link';
 import SanityImage from './SanityImage';
 import { formatDate } from '@/lib/utils';
+import { BlogCardProps } from '@/lib/types';
+import clsx from 'clsx';
 
-const BlogCard = (
-  props: NonNullable<ALL_BLOGS_QUERYResult['blogs'][number]>,
-) => {
+const BlogCard = ({ className, ...props }: BlogCardProps) => {
   const { title, slug, publishedAt, author, mainImage, category } = props;
   return (
     <Link
       href={`/blog/${slug?.current}`}
-      className="rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 mx-auto"
+      className={clsx(
+        'rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 mx-auto',
+        className,
+      )}
     >
       <div className="overflow-hidden group relative">
         {mainImage?.asset?.url && mainImage.alt ? (

@@ -1,3 +1,5 @@
+import { ALL_BLOGS_QUERYResult } from '@/sanity/types';
+
 // Bounded Props
 export type BoundedProps = {
   children: React.ReactNode;
@@ -37,6 +39,13 @@ export type BackToPageProps = {
   url: string;
   className?: string;
   children: React.ReactNode;
+};
+
+// Blog Card Props
+export type BlogCardProps = NonNullable<
+  ALL_BLOGS_QUERYResult['blogs'][number]
+> & {
+  className?: string;
 };
 
 /** Animations */
