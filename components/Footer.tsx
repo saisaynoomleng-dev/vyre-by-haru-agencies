@@ -63,7 +63,7 @@ const Footer = () => {
               autoComplete="name"
             />
             {state.status === 'error' && state.field === 'fullName' ? (
-              <p className="text-fs-200 italic text-red-500">{state.message}</p>
+              <p className="form-error-message">{state.message}</p>
             ) : null}
           </div>
 
@@ -79,7 +79,7 @@ const Footer = () => {
               autoComplete="email"
             />
             {state.status === 'error' && state.field === 'email' ? (
-              <p className="text-fs-200 italic text-red-500">{state.message}</p>
+              <p className="form-error-message">{state.message}</p>
             ) : null}
           </div>
 
