@@ -1,5 +1,12 @@
+import Footer from '@/components/Footer';
+
 export default function frontendLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <main>{children}</main>;
+  return (
+    <main>
+      {children}
+      <Footer />
+    </main>
+  );
 }

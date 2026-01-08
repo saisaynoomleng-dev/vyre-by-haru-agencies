@@ -17,3 +17,27 @@ export type SubmitButtonProps = {
   className?: string;
   children?: React.ReactNode;
 };
+
+// Previous Newsletter form state
+export type PreviousNewsletterFormState = {
+  status: string;
+  message: string;
+  field?: string;
+};
+
+/** Animations */
+// Marquee Animation Props
+export type MarqueeAnimationProps = {
+  direction?: 'left' | 'right';
+  duration?: number;
+  children: React.ReactNode;
+  className?: string;
+};
+
+// SplitText Letter Props
+export type SplitTextLetterProps = {
+  direction?: 'top' | 'bottom' | 'left' | 'right';
+  duration?: number;
+  children: React.ReactNode;
+  className?: string;
+};

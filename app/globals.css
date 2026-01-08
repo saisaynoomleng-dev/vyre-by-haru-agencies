@@ -136,9 +136,9 @@
   --font-chivo-mono: var(--font-chivo-mono);
 
   /* font sizes */
-  --text-fs-900: 4.5rem;
-  --text-fs-800: 3.25rem;
-  --text-fs-700: 2.75rem;
+  --text-fs-900: 5.5rem;
+  --text-fs-800: 4.5rem;
+  --text-fs-700: 3.75rem;
   --text-fs-600: 2rem;
   --text-fs-500: 1.75rem;
   --text-fs-400: 1.25rem;
@@ -168,4 +168,8 @@
   p {
     @apply text-pretty;
   }
+}
+
+@utility divider {
+  @apply w-[80%] mx-auto h-[0.2px] bg-brand-black/10 my-5;
 }
