@@ -60,10 +60,10 @@ const Footer = () => {
               placeholder="Name"
               id="fullName"
               name="fullName"
-              autoComplete="username"
+              autoComplete="name"
             />
-            {state.status === 'error' && state.field === 'name' ? (
-              <p className="text-fs-200 italic text-red-500"></p>
+            {state.status === 'error' && state.field === 'fullName' ? (
+              <p className="text-fs-200 italic text-red-500">{state.message}</p>
             ) : null}
           </div>
 
@@ -72,12 +72,15 @@ const Footer = () => {
               Email
             </label>
             <Input
-              type="text"
+              type="email"
               placeholder="Email"
               id="email"
               name="email"
               autoComplete="email"
             />
+            {state.status === 'error' && state.field === 'email' ? (
+              <p className="text-fs-200 italic text-red-500">{state.message}</p>
+            ) : null}
           </div>
 
           <SubmitButton>send</SubmitButton>
