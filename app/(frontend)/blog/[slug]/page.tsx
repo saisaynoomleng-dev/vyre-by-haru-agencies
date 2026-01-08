@@ -1,7 +1,9 @@
 import BackToPage from '@/components/BackToPage';
+import BlogCard from '@/components/BlogCard';
 import Bounded from '@/components/Bounded';
 import SanityImage from '@/components/SanityImage';
 import SectionTitle from '@/components/SectionTitle';
+import { BlogCardSkeleton } from '@/components/Skeletons';
 import { formatDate } from '@/lib/utils';
 import { sanityFetch } from '@/sanity/lib/live';
 import { BLOG_QUERY } from '@/sanity/lib/queries';
@@ -9,8 +11,7 @@ import { myPortableTextComponent } from '@/sanity/schemaTypes/sanity-components/
 import { PortableText } from 'next-sanity';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { FaArrowLeftLong } from 'react-icons/fa6';
-import { MdCategory } from 'react-icons/md';
+import { Suspense } from 'react';
 
 const BlogDetailPage = async ({
   params,
@@ -29,6 +30,7 @@ const BlogDetailPage = async ({
   const authorName = blog.author?.name;
   const authorImageURL = blog?.author?.mainImage?.asset?.url;
   const authorImageAlt = blog?.author?.mainImage?.alt;
+  const authorURL = blog?.author?.slug?.current;
 
   return (
     <Bounded>
@@ -36,7 +38,10 @@ const BlogDetailPage = async ({
       <div className="flex flex-col justify-center ">
         <SectionTitle className="text-center">{blog?.title}</SectionTitle>
         <div className="flex justify-between items-center font-chivo-mono">
-          <div className="flex gap-x-2 items-center">
+          <Link
+            href={`/author/${authorURL}`}
+            className="flex gap-x-2 items-center"
+          >
             <div className="overflow-hidden">
               {authorImageAlt && authorImageURL ? (
                 <SanityImage
@@ -47,7 +52,7 @@ const BlogDetailPage = async ({
               ) : null}
             </div>
             <p>{authorName}</p>
-          </div>
+          </Link>
 
           <div className="flex flex-col gap-y-1 text-fs-300 items-end">
             {blog.publishedAt && (
@@ -74,6 +79,19 @@ const BlogDetailPage = async ({
             components={myPortableTextComponent}
           />
         )}
+      </div>
+
+      <div className="divider"></div>
+
+      <div className="flex flex-col gap-y-5">
+        <SectionTitle>Related Posts</SectionTitle>
+        <div className="flex gap-x-5 overflow-x-auto">
+          {blog.relatedPosts.map((post) => (
+            <Suspense key={post.slug?.current} fallback={<BlogCardSkeleton />}>
+              <BlogCard className="min-w-60" {...post} />
+            </Suspense>
+          ))}
+        </div>
       </div>
     </Bounded>
   );

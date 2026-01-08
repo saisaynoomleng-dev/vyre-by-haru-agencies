@@ -32,8 +32,6 @@ export default async function BlogPage({
   });
 
   const totalPages = Math.ceil(data.total / totalBlogs);
-  console.log(totalPages);
-
   return (
     <Bounded>
       <div className="flex flex-col gap-y-2 text-center justify-center items-center mb-10">
