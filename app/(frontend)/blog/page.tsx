@@ -1,6 +1,7 @@
 // src/app/blog/page.tsx
 import BlogCard from '@/components/BlogCard';
 import Bounded from '@/components/Bounded';
+import PageHero from '@/components/PageHero';
 import SectionTitle from '@/components/SectionTitle';
 import { BlogCardSkeleton } from '@/components/Skeletons';
 import { Button } from '@/components/ui/button';
@@ -39,12 +40,10 @@ export default async function BlogPage({
   const totalPages = Math.ceil(data.total / totalBlogs);
   return (
     <Bounded>
-      <div className="flex flex-col gap-y-2 text-center justify-center items-center mb-10">
-        <SectionTitle>Creative Dispatch</SectionTitle>
-        <p className="text-fs-300 text-brand-black/80">
-          Ideas shaped by experience, not trends.
-        </p>
-      </div>
+      <PageHero
+        title="Creative Dispatch"
+        subtitle="Ideas shaped by experience, not trends."
+      />
 
       <div className="grid md:grid-cols-3 gap-5">
         {data.blogs.map((blog) => (

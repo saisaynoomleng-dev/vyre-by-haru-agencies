@@ -7,7 +7,9 @@ const SectionTitle = ({
   children,
 }: SectionTitleProps) => {
   return (
-    <Comp className={clsx('font-semibold text-fs-600', className)}>
+    <Comp
+      className={clsx('font-semibold text-fs-500 md:text-fs-600', className)}
+    >
       {children}
     </Comp>
   );

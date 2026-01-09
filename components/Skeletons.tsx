@@ -5,7 +5,7 @@ export const BlogCardSkeleton = () => {
   return (
     <div className="max-w-100 lg:max-h-150 flex flex-col gap-y-2 rounded-2xl shadow-sm shadow-brand-black/10 mx-auto">
       <div>
-        <Skeleton className="w-100 h-125" />
+        <Skeleton className="w-85 h-85 mx-auto" />
       </div>
 
       <div className="flex flex-col gap-2 p-2">
@@ -25,7 +25,7 @@ export const ProjectCardSkeleton = () => {
   return (
     <div className="max-w-100 lg:max-h-150 flex flex-col gap-y-2 rounded-2xl shadow-sm shadow-brand-black/10">
       <div>
-        <Skeleton className="w-100 h-100" />
+        <Skeleton className="w-85 h-85 mx-auto" />
       </div>
 
       <div className="flex justify-between items-center p-2">
@@ -77,6 +77,22 @@ export const ReviewCardSkeleton = () => {
           <Skeleton className="w-30 h-3" />
           <Skeleton className="w-30 h-3" />
         </div>
+      </div>
+    </div>
+  );
+};
+
+export const ServiceCardSkeleton = () => {
+  return (
+    <div className="rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 group">
+      <Skeleton className="w-85 h-85 mx-auto" />
+
+      <div className="flex flex-col gap-y-3 p-3 text-fs-300">
+        <div className="flex justify-between items-center">
+          <Skeleton className="w-30 h-3" />
+          <Skeleton className="w-30 h-3" />
+        </div>
+        <Skeleton className="min-w-full h-3" />
       </div>
     </div>
   );

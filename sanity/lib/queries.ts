@@ -173,9 +173,12 @@ export const ALL_AWARDS_QUERY = defineQuery(`*[_type == 'award'
   awardedCategory
  }`);
 
-export const ALL_SERVICES_QUERY = defineQuery(`*[_type == 'service'
- && defined(slug.current)]{
-  title,
+export const ALL_SERVICES_QUERY = defineQuery(`{
+  "services": *[_type == 'service'
+ && defined(slug.current)]
+  | order(_updatedAt desc)
+  [$startIndex...$endIndex]{
+  name,
   slug,
   mainImage{
     alt,
@@ -183,11 +186,14 @@ export const ALL_SERVICES_QUERY = defineQuery(`*[_type == 'service'
   },
   subTitle,
   price
- }`);
+ },
+  "total": count(*[_type == 'service'
+                  && defined(slug.current)])
+}`);
 
 export const SERVICE_QUERY = defineQuery(`*[_type == 'service'
  && slug.current == $slug][0]{
-  title,
+  name,
   slug,
   desc,
   mainImage{
@@ -195,7 +201,19 @@ export const SERVICE_QUERY = defineQuery(`*[_type == 'service'
     asset->{url}
   },
   subTitle,
-  price
+  price,
+  "otherServices": *[_type == 'service'
+                    && _id != ^._id]{
+                      name,
+                      slug,
+                      desc,
+                      mainImage{
+                        alt,
+                        asset->{url}
+                      },
+                      subTitle,
+                      price,
+                    }
  }`);
 
 export const ALL_REVIEWS_QUERY = defineQuery(`*[_type == 'review']{
