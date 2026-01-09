@@ -1,4 +1,5 @@
 import Bounded from '@/components/Bounded';
+import PageHero from '@/components/PageHero';
 import ProjectCard from '@/components/ProjectCard';
 import SectionTitle from '@/components/SectionTitle';
 import { ProjectCardSkeleton } from '@/components/Skeletons';
@@ -37,16 +38,12 @@ const ProjectPage = async ({
 
   const totalPages = Math.ceil(data.total / projectPerPage);
 
-  console.log(data.projects);
-
   return (
     <Bounded>
-      <div className="flex flex-col gap-y-2 text-center justify-center items-center mb-10">
-        <SectionTitle>Projects.</SectionTitle>
-        <p className="text-fs-300 text-brand-black/80">
-          Projects crafted through thoughtful design and modern development.
-        </p>
-      </div>
+      <PageHero
+        title="Projects."
+        subtitle="Projects crafted through thoughtful design and modern development."
+      />
 
       <div className="grid md:grid-cols-2 gap-y-3 md:gap-5">
         {data.projects.map((project) => (

@@ -585,23 +585,26 @@ export type ALL_AWARDS_QUERYResult = Array<{
   awardedCategory: string | null;
 }>;
 // Variable: ALL_SERVICES_QUERY
-// Query: *[_type == 'service' && defined(slug.current)]{  title,  slug,  mainImage{    alt,    asset->{url}  },  subTitle,  price }
-export type ALL_SERVICES_QUERYResult = Array<{
-  title: null;
-  slug: Slug | null;
-  mainImage: {
-    alt: string | null;
-    asset: {
-      url: string | null;
+// Query: {  "services": *[_type == 'service' && defined(slug.current)]  | order(_updatedAt desc)  [$startIndex...$endIndex]{  name,  slug,  mainImage{    alt,    asset->{url}  },  subTitle,  price },  "total": count(*[_type == 'service'                  && defined(slug.current)])}
+export type ALL_SERVICES_QUERYResult = {
+  services: Array<{
+    name: string | null;
+    slug: Slug | null;
+    mainImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
     } | null;
-  } | null;
-  subTitle: string | null;
-  price: number | null;
-}>;
+    subTitle: string | null;
+    price: number | null;
+  }>;
+  total: number;
+};
 // Variable: SERVICE_QUERY
-// Query: *[_type == 'service' && slug.current == $slug][0]{  title,  slug,  desc,  mainImage{    alt,    asset->{url}  },  subTitle,  price }
+// Query: *[_type == 'service' && slug.current == $slug][0]{  name,  slug,  desc,  mainImage{    alt,    asset->{url}  },  subTitle,  price,  "otherServices": *[_type == 'service'                    && _id != ^._id]{                      name,                      slug,                      desc,                      mainImage{                        alt,                        asset->{url}                      },                      subTitle,                      price,                    } }
 export type SERVICE_QUERYResult = {
-  title: null;
+  name: string | null;
   slug: Slug | null;
   desc: BlockContent | null;
   mainImage: {
@@ -612,6 +615,19 @@ export type SERVICE_QUERYResult = {
   } | null;
   subTitle: string | null;
   price: number | null;
+  otherServices: Array<{
+    name: string | null;
+    slug: Slug | null;
+    desc: BlockContent | null;
+    mainImage: {
+      alt: string | null;
+      asset: {
+        url: string | null;
+      } | null;
+    } | null;
+    subTitle: string | null;
+    price: number | null;
+  }>;
 } | null;
 // Variable: ALL_REVIEWS_QUERY
 // Query: *[_type == 'review']{  fullName,  role,  mainImage{    alt,    asset->{url}  },  desc,  title }
@@ -661,8 +677,8 @@ declare module '@sanity/client' {
     "*[_type == 'teamMember'\n && defined(slug.current)]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": ALL_TEAM_MEMBERS_QUERYResult;
     "*[_type == 'teamMember'\n && slug.current == $slug][0]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": TEAM_MEMBER_QUERYResult;
     "*[_type == 'award'\n && defined(slug.current)]{\n  awardedTitle,\n  awardedDate,\n  slug,\n  awardedCategory\n }": ALL_AWARDS_QUERYResult;
-    "*[_type == 'service'\n && defined(slug.current)]{\n  title,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n }": ALL_SERVICES_QUERYResult;
-    "*[_type == 'service'\n && slug.current == $slug][0]{\n  title,\n  slug,\n  desc,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n }": SERVICE_QUERYResult;
+    '{\n  "services": *[_type == \'service\'\n && defined(slug.current)]\n  | order(_updatedAt desc)\n  [$startIndex...$endIndex]{\n  name,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n },\n  "total": count(*[_type == \'service\'\n                  && defined(slug.current)])\n}': ALL_SERVICES_QUERYResult;
+    "*[_type == 'service'\n && slug.current == $slug][0]{\n  name,\n  slug,\n  desc,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price,\n  \"otherServices\": *[_type == 'service'\n                    && _id != ^._id]{\n                      name,\n                      slug,\n                      desc,\n                      mainImage{\n                        alt,\n                        asset->{url}\n                      },\n                      subTitle,\n                      price,\n                    }\n }": SERVICE_QUERYResult;
     "*[_type == 'review']{\n  fullName,\n  role,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  title\n }": ALL_REVIEWS_QUERYResult;
     "*[_type == 'faq']{\n  question,\n  answer\n}": ALL_FAQS_QUERYResult;
     "*[_type == 'milestone'\n && defined(slug.current)]{\n  title,\n  slug,\n  year,\n  desc\n }": ALL_MILESTONES_QUERYResult;

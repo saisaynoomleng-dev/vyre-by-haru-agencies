@@ -1,6 +1,7 @@
 import {
   ALL_BLOGS_QUERYResult,
   ALL_PROJECTS_QUERYResult,
+  ALL_SERVICES_QUERYResult,
 } from '@/sanity/types';
 
 // Bounded Props
@@ -57,6 +58,18 @@ export type ProjectCardProps = NonNullable<
   ALL_PROJECTS_QUERYResult['projects'][number]
 > & { className?: string };
 
+// PageHero Props
+export type PageHeroProps = {
+  title: string;
+  subtitle: string;
+};
+
+// Service Card Props
+export type ServiceCardProps = NonNullable<
+  ALL_SERVICES_QUERYResult['services'][number]
+> & {
+  className?: string;
+};
 /** Animations */
 // Marquee Animation Props
 export type MarqueeAnimationProps = {

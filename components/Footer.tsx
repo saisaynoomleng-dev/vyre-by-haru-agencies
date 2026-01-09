@@ -21,6 +21,7 @@ const FOOTER_LINKS = [
   { name: 'About', url: '/about' },
   { name: 'Blog', url: '/blog' },
   { name: 'Contact', url: '/contact' },
+  { name: 'Services', url: '/services' },
   { name: 'Accessibility Statement', url: '/accessibility_statement' },
   { name: 'Privacy And Policy', url: '/privacy_and_policy' },
 ];
