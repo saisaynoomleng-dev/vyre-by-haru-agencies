@@ -7,9 +7,14 @@ import { Button } from '@/components/ui/button';
 import { sanityFetch } from '@/sanity/lib/live';
 import { ALL_BLOGS_QUERY } from '@/sanity/lib/queries';
 import clsx from 'clsx';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
+export const metadata: Metadata = {
+  title: 'Blogs',
+};
 
 export default async function BlogPage({
   searchParams,
@@ -37,7 +42,7 @@ export default async function BlogPage({
       <div className="flex flex-col gap-y-2 text-center justify-center items-center mb-10">
         <SectionTitle>Creative Dispatch</SectionTitle>
         <p className="text-fs-300 text-brand-black/80">
-          Every color, word, and pixel comes from a clear strategy.
+          Ideas shaped by experience, not trends.
         </p>
       </div>
 
@@ -63,7 +68,7 @@ export default async function BlogPage({
               disabled={currentPage === 1}
               className={clsx(
                 'bg-transparent hover:bg-transparent',
-                currentPage === 1 ? 'text-brand-black/40' : 'text-brand-black',
+                currentPage === 1 ? 'text-brand-red/50' : 'text-brand-red',
               )}
             >
               <FaChevronLeft />
@@ -83,10 +88,10 @@ export default async function BlogPage({
               >
                 <Button
                   className={clsx(
-                    '',
+                    'hover:bg-brand-red',
                     currentPage === pageNum
-                      ? 'bg-brand-black'
-                      : 'bg-brand-black/80',
+                      ? 'bg-brand-red'
+                      : 'bg-brand-red/50',
                   )}
                 >
                   {pageNum}
@@ -109,8 +114,8 @@ export default async function BlogPage({
               className={clsx(
                 'bg-transparent hover:bg-transparent',
                 currentPage === totalPages
-                  ? 'text-brand-black/40'
-                  : 'text-brand-black',
+                  ? 'text-brand-red/50'
+                  : 'text-brand-red',
               )}
             >
               <FaChevronRight />

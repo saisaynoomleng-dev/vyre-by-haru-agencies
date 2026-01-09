@@ -1,6 +1,7 @@
 import Bounded from '@/components/Bounded';
 import { sanityFetch } from '@/sanity/lib/live';
 import { UTILITY_PAGE_QUERY } from '@/sanity/lib/queries';
+import { myPortableTextComponent } from '@/sanity/schemaTypes/sanity-components/myPortableText';
 import { Metadata } from 'next';
 import { PortableText } from 'next-sanity';
 
@@ -19,7 +20,10 @@ const PrivacyAndPolicyPage = () => {
     <Bounded>
       {page?.desc && (
         <div className="prose md:prose-lg">
-          <PortableText value={page.desc} />
+          <PortableText
+            value={page.desc}
+            components={myPortableTextComponent}
+          />
         </div>
       )}
     </Bounded>

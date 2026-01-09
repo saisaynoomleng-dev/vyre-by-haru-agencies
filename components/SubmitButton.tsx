@@ -6,11 +6,11 @@ import clsx from 'clsx';
 import { useFormStatus } from 'react-dom';
 import LoadingDot from './LoadingDot';
 
-const SubmitButton = ({ children, className }: SubmitButtonProps) => {
+const SubmitButton = ({ children, className, onClick }: SubmitButtonProps) => {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" className={clsx('', className)}>
+    <Button onClick={onClick} type="submit" className={clsx('', className)}>
       {pending ? <LoadingDot /> : children}
     </Button>
   );

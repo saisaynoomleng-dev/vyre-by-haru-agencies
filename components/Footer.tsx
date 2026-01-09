@@ -4,9 +4,10 @@ import Talk from './Talk';
 import Form from 'next/form';
 import { Input } from './ui/input';
 import SubmitButton from './SubmitButton';
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { handleNewsletter } from '@/lib/actions';
 import Link from 'next/link';
+import { toast } from 'sonner';
 
 const initialFormState = {
   status: '',
@@ -30,8 +31,17 @@ const Footer = () => {
     initialFormState,
   );
 
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    }
+    if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state.status, state.message]);
+
   return (
-    <footer className="grid md:grid-cols-2 px-3 py-8 md:px-5 lg:px-8 md:py-10 lg:py-14 bg-brand-yellow/40 gap-x-5 md:gap-x-8 lg:gap-x-10 gap-y-3 md:gap-y-5 lg:gap-y-8">
+    <footer className="grid md:grid-cols-2 px-3 py-4 md:px-5 lg:px-8 lg:py-5 min-h-screen space-y-5 md:space-y-8 lg:space-y-10 bg-brand-yellow/40 gap-x-5 md:gap-x-8 lg:gap-x-10 gap-y-3 md:gap-y-5 lg:gap-y-8">
       <div className="flex flex-col gap-y-2">
         <p>
           <span className="font-semibold">
@@ -90,7 +100,7 @@ const Footer = () => {
       <div className="divider col-span-full"></div>
 
       <div className="col-span-full flex flex-col md:flex-row md:justify-between gap-x-3 gap-y-3 items-center">
-        <div className="flex justify-between gap-x-3">
+        <div className="flex justify-between gap-x-3 max-md:flex-wrap max-md:items-center gap-y-2">
           {FOOTER_LINKS.map((link) => (
             <Link
               href={link.url}

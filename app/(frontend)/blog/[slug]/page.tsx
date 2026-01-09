@@ -4,14 +4,27 @@ import Bounded from '@/components/Bounded';
 import SanityImage from '@/components/SanityImage';
 import SectionTitle from '@/components/SectionTitle';
 import { BlogCardSkeleton } from '@/components/Skeletons';
-import { formatDate } from '@/lib/utils';
+import { capitalizeText, formatDate, replaceDash } from '@/lib/utils';
 import { sanityFetch } from '@/sanity/lib/live';
 import { BLOG_QUERY } from '@/sanity/lib/queries';
 import { myPortableTextComponent } from '@/sanity/schemaTypes/sanity-components/myPortableText';
+import { Metadata } from 'next';
 import { PortableText } from 'next-sanity';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const slugFormatted = replaceDash(slug);
+  return {
+    title: capitalizeText(slugFormatted),
+  };
+}
 
 const BlogDetailPage = async ({
   params,
@@ -85,6 +98,7 @@ const BlogDetailPage = async ({
 
       <div className="flex flex-col gap-y-5">
         <SectionTitle>Related Posts</SectionTitle>
+
         <div className="flex gap-x-5 overflow-x-auto">
           {blog.relatedPosts.map((post) => (
             <Suspense key={post.slug?.current} fallback={<BlogCardSkeleton />}>

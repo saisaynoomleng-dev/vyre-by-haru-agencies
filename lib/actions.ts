@@ -36,7 +36,7 @@ export const handleNewsletter = async (
 
     return {
       status: 'success',
-      message: 'Thank you for your subscription',
+      message: 'Thank you for your subscription!',
     };
   } catch (err) {
     return {
@@ -88,7 +88,7 @@ export const handleContactForm = async (
 
     return {
       status: 'success',
-      message: "Thank you for contacting us. We'll be in touch shortly",
+      message: "Thank you for contacting us. We'll be in touch shortly!",
     };
   } catch (error) {
     return {

@@ -1,14 +1,18 @@
-import { ALL_PROJECTS_QUERYResult } from '@/sanity/types';
 import Link from 'next/link';
 import SanityImage from './SanityImage';
 import Image from 'next/image';
+import { ProjectCardProps } from '@/lib/types';
+import clsx from 'clsx';
 
-const ProjectCard = (props: NonNullable<ALL_PROJECTS_QUERYResult[number]>) => {
+const ProjectCard = ({ className, ...props }: ProjectCardProps) => {
   const { name, slug, finishedAt, mainImage, logoImage } = props;
   return (
     <Link
       href={`/projects/${slug?.current}`}
-      className="rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 group"
+      className={clsx(
+        'rounded-2xl shadow-sm shadow-brand-black/10 max-w-100 lg:max-h-150 group',
+        className,
+      )}
     >
       <div className="overflow-hidden relative">
         {mainImage?.alt && mainImage?.asset?.url ? (
