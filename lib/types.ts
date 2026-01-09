@@ -1,4 +1,7 @@
-import { ALL_BLOGS_QUERYResult } from '@/sanity/types';
+import {
+  ALL_BLOGS_QUERYResult,
+  ALL_PROJECTS_QUERYResult,
+} from '@/sanity/types';
 
 // Bounded Props
 export type BoundedProps = {
@@ -18,6 +21,7 @@ export type SanityImageProps = {
 export type SubmitButtonProps = {
   className?: string;
   children?: React.ReactNode;
+  onClick?: React.ComponentProps<'button'>['onClick'];
 };
 
 // Previous form state
@@ -47,6 +51,11 @@ export type BlogCardProps = NonNullable<
 > & {
   className?: string;
 };
+
+// Project Card Props
+export type ProjectCardProps = NonNullable<
+  ALL_PROJECTS_QUERYResult['projects'][number]
+> & { className?: string };
 
 /** Animations */
 // Marquee Animation Props

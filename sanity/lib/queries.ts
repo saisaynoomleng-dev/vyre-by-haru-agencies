@@ -83,8 +83,12 @@ export const AUTHOR_QUERY = defineQuery(`*[_type == 'author'
   slug
  }`);
 
-export const ALL_PROJECTS_QUERY = defineQuery(`*[_type == 'project'
- && defined(slug.current)]{
+export const ALL_PROJECTS_QUERY = defineQuery(`{
+  "projects": *[_type == 'project'
+ && defined(slug.current)]
+ | order(finishedAt desc)
+ [$startIndex...$endIndex]
+ {
   name,
   slug,
   finishedAt,
@@ -98,11 +102,13 @@ export const ALL_PROJECTS_QUERY = defineQuery(`*[_type == 'project'
     alt,
     asset->{url}
   }
- }`);
+ },
+ "total": count(*[_type == 'project' && defined(slug.current) ])
+}`);
 
 export const PROJECT_QUERY = defineQuery(`*[_type == 'project'
  && slug.current ==  $slug][0]{
-  title,
+  name,
   slug,
   finishedAt,
   scope,
@@ -115,7 +121,24 @@ export const PROJECT_QUERY = defineQuery(`*[_type == 'project'
   logoImage{
     alt,
     asset->{url}
-  }
+  },
+  "otherProjects": *[_type == 'project'
+                      && _id != ^.id]{
+                          name,
+                          slug,
+                          finishedAt,
+                          scope,
+                          timeline,
+                          desc,
+                          mainImage{
+                            alt,
+                            asset->{url}
+                          },
+                          logoImage{
+                            alt,
+                            asset->{url}
+                          },
+                      }
  }`);
 
 export const ALL_TEAM_MEMBERS_QUERY = defineQuery(`*[_type == 'teamMember'

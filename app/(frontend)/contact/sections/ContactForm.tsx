@@ -15,7 +15,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { handleContactForm } from '@/lib/actions';
 import clsx from 'clsx';
 import Form from 'next/form';
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 const initialContactFormState = {
   status: '',
@@ -48,6 +49,15 @@ const ContactForm = ({ className }: { className?: string }) => {
     initialContactFormState,
   );
   const [scope, setScope] = useState<string>('');
+
+  useEffect(() => {
+    if (state.status === 'success') {
+      toast.success(state.message);
+    }
+    if (state.status === 'error') {
+      toast.error(state.message);
+    }
+  }, [state.status, state.message]);
 
   return (
     <Form

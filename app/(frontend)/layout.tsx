@@ -1,3 +1,4 @@
+import ClientToaster from '@/components/ClientToaster';
 import Footer from '@/components/Footer';
 
 export default function frontendLayout({
@@ -7,6 +8,8 @@ export default function frontendLayout({
     <main>
       {children}
       <Footer />
+
+      <ClientToaster />
     </main>
   );
 }

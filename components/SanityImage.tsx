@@ -7,12 +7,12 @@ const SanityImage = ({ alt, url, className }: SanityImageProps) => {
   return (
     <Image
       alt={alt || ''}
-      src={urlFor(url).width(400).height(500).format('webp').url()}
+      src={urlFor(url).format('webp').url()}
       loading="eager"
       priority
       width={400}
       height={500}
-      className={clsx('object-cover min-w-full', className)}
+      className={clsx('object-cover  md:mx-0', className)}
     />
   );
 };

@@ -27,3 +27,7 @@ export const formatCurrency = (currency: number) => {
 export const replaceUnderscore = (text: string) => {
   return text.replace(/_/g, ' ');
 };
+
+export const replaceDash = (text: string) => {
+  return text.replaceAll(/-/g, ' ');
+};

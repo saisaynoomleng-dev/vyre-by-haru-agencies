@@ -40,4 +40,9 @@ export const myPortableTextComponent: PortableTextComponents = {
       <h2 className="text-brand-black font-semibold">{children}</h2>
     ),
   },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="marker:text-brand-red">{children}</ul>
+    ),
+  },
 };
