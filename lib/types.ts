@@ -70,6 +70,13 @@ export type ServiceCardProps = NonNullable<
 > & {
   className?: string;
 };
+
+//
+export type HomeDesktopServiceSectionProps = {
+  className?: string;
+  data: ALL_SERVICES_QUERYResult;
+};
+
 /** Animations */
 // Marquee Animation Props
 export type MarqueeAnimationProps = {
@@ -80,9 +87,15 @@ export type MarqueeAnimationProps = {
 };
 
 // SplitText Letter Props
-export type SplitTextLetterProps = {
-  direction?: 'top' | 'bottom' | 'left' | 'right';
-  duration?: number;
+export type TextHighlighterProps = {
   children: React.ReactNode;
+  className?: string;
+};
+
+// SlideIn Animation Props
+export type SlideInAnimationProps = {
+  children: React.ReactNode;
+  direction: 'left' | 'right' | 'top' | 'bottom';
+  duration?: number;
   className?: string;
 };

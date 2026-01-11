@@ -37,6 +37,20 @@ export const serviceType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'bgColor',
+      title: 'Background Color',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'yellow', value: '#f6bd60' },
+          { title: 'rose', value: '#f5cac3' },
+          { title: 'cyan', value: '#84a59d' },
+          { title: 'red', value: '#f28482' },
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Service Image',
       type: 'blockImage',

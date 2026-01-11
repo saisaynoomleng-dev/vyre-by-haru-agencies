@@ -27,6 +27,13 @@ const Header = () => {
     setNavOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = navOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [navOpen]);
+
   return (
     <header className="px-3 py-4 md:px-5 lg:px-8 lg:py-5 space-y-5 md:space-y-8 lg:space-y-10 flex justify-between relative items-center">
       <div>
@@ -40,7 +47,7 @@ const Header = () => {
         aria-controls="main-nav"
         aria-expanded={navOpen}
         className={clsx(
-          'w-5 bg-brand-red h-1 rounded-sm relative z-50 before:absolute before:bg-brand-red before:w-1 before:h-5 before:bottom-0 before:translate-y-[40%] before:rounded-sm before:translate-x-[-60%] transition-all duration-200 ease-in-out',
+          'w-6 block bg-brand-red h-1 rounded-sm relative z-50 before:absolute before:bg-brand-red before:w-1 before:h-6 before:bottom-0 before:translate-y-[40%] before:rounded-sm before:translate-x-[-60%] transition-all duration-200 ease-in-out',
           navOpen ? 'rotate-45' : 'rotate-0',
         )}
       ></button>
@@ -50,7 +57,7 @@ const Header = () => {
         aria-label="Navigation Menu"
         id="main-nav"
         className={clsx(
-          'flex flex-col gap-y-3 fixed inset-0 bg-brand-white pt-15 pl-5 z-20 transition-all duration-400 ease-in-out',
+          'flex flex-col gap-y-3 fixed inset-0 bg-brand-accent/10 backdrop-blur-2xl pt-15 pl-5 z-20 transition-all duration-400 ease-in-out bottom-[50vh] shadow-2xl shadow-brand-black/50',
           navOpen ? 'translate-y-0' : '-translate-y-full',
         )}
       >

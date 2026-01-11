@@ -6,7 +6,7 @@ export default function frontendLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main>
+    <main className="lg:max-w-300 mx-auto">
       <Header />
       {children}
       <Footer />
