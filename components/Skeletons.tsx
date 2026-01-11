@@ -38,7 +38,7 @@ export const ProjectCardSkeleton = () => {
 
 export const MemberCardSkeleton = () => {
   return (
-    <div className="max-w-50 lg:max-h-75 flex flex-col gap-y-2">
+    <div className="max-w-50 lg:max-h-100 flex flex-col gap-y-2">
       <div>
         <Skeleton className="w-50 h-50" />
       </div>

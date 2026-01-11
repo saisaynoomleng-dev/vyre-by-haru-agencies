@@ -6,25 +6,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './ui/accordion';
-import { SlideInAnimation, SlideInAnimationGroup } from './Animations';
+import clsx from 'clsx';
 
-const FAQ = async () => {
+const FAQ = async ({ className }: { className?: string }) => {
   const { data: FAQs } = await sanityFetch({ query: ALL_FAQS_QUERY });
   return (
-    <div className="grid md:grid-cols-2">
-      <SlideInAnimation direction="left">
-        <h3 className="font-semibold text-fs-500 md:text-fs-600">FAQ.</h3>
-      </SlideInAnimation>
+    <div className={clsx('grid md:grid-cols-2', className)}>
+      <h3 className="font-semibold text-fs-500 md:text-fs-600">FAQ.</h3>
 
       <Accordion type="single" collapsible className="w-full">
-        <SlideInAnimationGroup direction="top">
+        <div>
           {FAQs.map((faq, i) => (
             <AccordionItem key={i} value={`${i}`}>
               <AccordionTrigger>{faq.question}</AccordionTrigger>
               <AccordionContent>{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}
-        </SlideInAnimationGroup>
+        </div>
       </Accordion>
     </div>
   );

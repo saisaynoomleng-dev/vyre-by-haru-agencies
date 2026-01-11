@@ -1,4 +1,5 @@
 import { MarqueeAnimation, TextHighlighter } from '@/components/Animations';
+import Bounded from '@/components/Bounded';
 import SocialLinks from '@/components/SocialLinks';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -32,7 +33,7 @@ const HERO_IMAGES_2 = [
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col gap-y-3 md:gap-y-5 max-w-screen overflow-x-hidden! min-h-screen">
+    <Bounded className="flex flex-col gap-y-3 md:gap-y-5 max-w-screen overflow-x-hidden! min-h-screen">
       <div className="grid grid-cols-6 grid-rows-[1fr_auto_auto] text-center gap-y-2">
         <h1 className="text-fs-700 md:text-fs-800 lg:text-fs-900 font-black row-start-1 col-span-full">
           Vyre&reg;
@@ -132,7 +133,7 @@ const HeroSection = () => {
           <TextHighlighter>ideas that refuse to be ordinary.</TextHighlighter>
         </p>
       </div>
-    </div>
+    </Bounded>
   );
 };
 

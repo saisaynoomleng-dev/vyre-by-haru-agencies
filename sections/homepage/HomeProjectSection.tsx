@@ -2,6 +2,7 @@ import {
   SlideInAnimation,
   SlideInAnimationGroup,
 } from '@/components/Animations';
+import Bounded from '@/components/Bounded';
 import ProjectCard from '@/components/ProjectCard';
 import SectionTitle from '@/components/SectionTitle';
 import { sanityFetch } from '@/sanity/lib/live';
@@ -17,7 +18,7 @@ const HomeProjectSection = async () => {
   });
 
   return (
-    <div className="flex flex-col gap-5">
+    <Bounded className="flex flex-col gap-5">
       <SlideInAnimation direction="left">
         <SectionTitle>Latest Projects</SectionTitle>
       </SlideInAnimation>
@@ -34,7 +35,7 @@ const HomeProjectSection = async () => {
           />
         ))}
       </SlideInAnimationGroup>
-    </div>
+    </Bounded>
   );
 };
 
