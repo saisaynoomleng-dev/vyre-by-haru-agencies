@@ -1,4 +1,4 @@
-import { MarqueeAnimation } from '@/components/Animations';
+import { MarqueeAnimation, TextHighlighter } from '@/components/Animations';
 import SocialLinks from '@/components/SocialLinks';
 import clsx from 'clsx';
 import Image from 'next/image';
@@ -32,7 +32,7 @@ const HERO_IMAGES_2 = [
 
 const HeroSection = () => {
   return (
-    <div className="flex flex-col gap-y-3 md:gap-y-5">
+    <div className="flex flex-col gap-y-3 md:gap-y-5 max-w-screen overflow-x-hidden! min-h-screen">
       <div className="grid grid-cols-6 grid-rows-[1fr_auto_auto] text-center gap-y-2">
         <h1 className="text-fs-700 md:text-fs-800 lg:text-fs-900 font-black row-start-1 col-span-full">
           Vyre&reg;
@@ -47,7 +47,7 @@ const HeroSection = () => {
 
       <SocialLinks />
 
-      <MarqueeAnimation duration={20} direction="left" className="max-w-screen">
+      <MarqueeAnimation duration={20} direction="left">
         <div className="flex gap-x-3 min-w-max">
           {HERO_IMAGES.map((img, i) => (
             <div key={img.url}>
@@ -86,11 +86,7 @@ const HeroSection = () => {
         </div>
       </MarqueeAnimation>
 
-      <MarqueeAnimation
-        duration={40}
-        direction="right"
-        className="max-w-screen"
-      >
+      <MarqueeAnimation duration={40} direction="right">
         <div className="flex gap-x-3 min-w-max">
           {HERO_IMAGES_2.map((img, i) => (
             <div key={`${img.url}-${i}`}>
@@ -132,7 +128,8 @@ const HeroSection = () => {
       <div className="flex justify-center items-center max-w-[80%] md:max-w-[50%] mx-auto text-center my-5">
         <p className="font-semibold text-fs-500">
           We&apos;s Vyre&reg; — a creative studio cultivating bold brands,
-          beautiful websites, and ideas that refuse to be ordinary.
+          beautiful websites, and{' '}
+          <TextHighlighter>ideas that refuse to be ordinary.</TextHighlighter>
         </p>
       </div>
     </div>

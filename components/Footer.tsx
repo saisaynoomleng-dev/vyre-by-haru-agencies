@@ -42,7 +42,7 @@ const Footer = () => {
   }, [state.status, state.message]);
 
   return (
-    <footer className="grid md:grid-cols-2 px-3 py-4 md:px-5 lg:px-8 lg:py-5 min-h-screen space-y-5 md:space-y-8 lg:space-y-10 bg-brand-yellow/40 gap-x-5 md:gap-x-8 lg:gap-x-10 gap-y-3 md:gap-y-5 lg:gap-y-8">
+    <footer className="grid md:grid-cols-2 md:grid-rows-[auto_auto_auto] px-3 py-4 md:px-5 lg:px-8 lg:py-5 space-y-5 md:space-y-8 lg:space-y-10 bg-brand-yellow/40 gap-x-5 md:gap-x-8 lg:gap-x-10 gap-y-3 md:gap-y-5 lg:gap-y-8">
       <div className="flex flex-col gap-y-2">
         <p>
           <span className="font-semibold">
@@ -56,10 +56,12 @@ const Footer = () => {
       <div className="divider md:hidden"></div>
 
       <div className="flex flex-col gap-y-2">
-        <h3 className="font-semibold text-fs-500">Join our newsletter</h3>
-        <p className="text-brand-black/60 text-fs-300 font-chivo-mono">
-          Daily dose of design trends by the team.
-        </p>
+        <div className="flex flex-col gap-y-3 md:gap-y-5">
+          <h3 className="font-semibold text-fs-500">Join our newsletter</h3>
+          <p className="text-brand-black/60 text-fs-300 font-chivo-mono">
+            Daily dose of design trends by the team.
+          </p>
+        </div>
 
         <Form action={actionFunction} className="flex flex-col gap-y-4">
           <div>

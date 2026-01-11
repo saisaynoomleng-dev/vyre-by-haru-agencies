@@ -156,6 +156,7 @@ export type Service = {
   slug?: Slug;
   subTitle?: string;
   price?: number;
+  bgColor?: '#f6bd60' | '#f5cac3' | '#84a59d' | '#f28482';
   mainImage?: BlockImage;
   desc?: BlockContent;
 };
@@ -585,7 +586,7 @@ export type ALL_AWARDS_QUERYResult = Array<{
   awardedCategory: string | null;
 }>;
 // Variable: ALL_SERVICES_QUERY
-// Query: {  "services": *[_type == 'service' && defined(slug.current)]  | order(_updatedAt desc)  [$startIndex...$endIndex]{  name,  slug,  mainImage{    alt,    asset->{url}  },  subTitle,  price },  "total": count(*[_type == 'service'                  && defined(slug.current)])}
+// Query: {  "services": *[_type == 'service' && defined(slug.current)]  | order(_updatedAt desc)  [$startIndex...$endIndex]{  name,  slug,  mainImage{    alt,    asset->{url}  },  subTitle,  price,  bgColor, },  "total": count(*[_type == 'service'                  && defined(slug.current)])}
 export type ALL_SERVICES_QUERYResult = {
   services: Array<{
     name: string | null;
@@ -598,6 +599,7 @@ export type ALL_SERVICES_QUERYResult = {
     } | null;
     subTitle: string | null;
     price: number | null;
+    bgColor: '#84a59d' | '#f28482' | '#f5cac3' | '#f6bd60' | null;
   }>;
   total: number;
 };
@@ -677,7 +679,7 @@ declare module '@sanity/client' {
     "*[_type == 'teamMember'\n && defined(slug.current)]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": ALL_TEAM_MEMBERS_QUERYResult;
     "*[_type == 'teamMember'\n && slug.current == $slug][0]{\n  fullName,\n  role,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  bio\n }": TEAM_MEMBER_QUERYResult;
     "*[_type == 'award'\n && defined(slug.current)]{\n  awardedTitle,\n  awardedDate,\n  slug,\n  awardedCategory\n }": ALL_AWARDS_QUERYResult;
-    '{\n  "services": *[_type == \'service\'\n && defined(slug.current)]\n  | order(_updatedAt desc)\n  [$startIndex...$endIndex]{\n  name,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price\n },\n  "total": count(*[_type == \'service\'\n                  && defined(slug.current)])\n}': ALL_SERVICES_QUERYResult;
+    '{\n  "services": *[_type == \'service\'\n && defined(slug.current)]\n  | order(_updatedAt desc)\n  [$startIndex...$endIndex]{\n  name,\n  slug,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price,\n  bgColor,\n },\n  "total": count(*[_type == \'service\'\n                  && defined(slug.current)])\n}': ALL_SERVICES_QUERYResult;
     "*[_type == 'service'\n && slug.current == $slug][0]{\n  name,\n  slug,\n  desc,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  subTitle,\n  price,\n  \"otherServices\": *[_type == 'service'\n                    && _id != ^._id]{\n                      name,\n                      slug,\n                      desc,\n                      mainImage{\n                        alt,\n                        asset->{url}\n                      },\n                      subTitle,\n                      price,\n                    }\n }": SERVICE_QUERYResult;
     "*[_type == 'review']{\n  fullName,\n  role,\n  mainImage{\n    alt,\n    asset->{url}\n  },\n  desc,\n  title\n }": ALL_REVIEWS_QUERYResult;
     "*[_type == 'faq']{\n  question,\n  answer\n}": ALL_FAQS_QUERYResult;

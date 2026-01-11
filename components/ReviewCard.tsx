@@ -7,8 +7,8 @@ import { BsQuote } from 'react-icons/bs';
 const ReviewCard = (props: NonNullable<ALL_REVIEWS_QUERYResult[number]>) => {
   const { fullName, role, mainImage, desc, title } = props;
   return (
-    <div className="grid grid-cols-[auto_1fr] gap-x-10 md:gap-x-15 p-5 bg-brand-yellow/10">
-      <div className="">
+    <div className="grid md:grid-cols-[auto_1fr] gap-x-10 md:gap-x-15 p-5 shadow rounded-sm gap-y-2 md:gap-y-0">
+      <div className="mx-auto md:mx-0">
         {mainImage?.alt && mainImage?.asset?.url ? (
           <Image
             alt={mainImage.alt || ''}
@@ -22,9 +22,12 @@ const ReviewCard = (props: NonNullable<ALL_REVIEWS_QUERYResult[number]>) => {
         ) : null}
       </div>
 
-      <div className="flex flex-col justify-center gap-y-3">
+      <div className="flex flex-col justify-center gap-y-3 text-fs-300 md:text-fs-400">
+        <p className="font-medium uppercase font-chivo-mono text-center md:text-left">
+          {title}
+        </p>
         <p>
-          <BsQuote className="text-fs-800 text-brand-red" />
+          <BsQuote className="hidden md:block text-fs-800 text-brand-red" />
           <span className="font-medium">{desc}</span>
         </p>
         <div className="text-fs-300">

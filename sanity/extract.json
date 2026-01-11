@@ -832,6 +832,31 @@
         },
         "optional": true
       },
+      "bgColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "#f6bd60"
+            },
+            {
+              "type": "string",
+              "value": "#f5cac3"
+            },
+            {
+              "type": "string",
+              "value": "#84a59d"
+            },
+            {
+              "type": "string",
+              "value": "#f28482"
+            }
+          ]
+        },
+        "optional": true
+      },
       "mainImage": {
         "type": "objectAttribute",
         "value": {

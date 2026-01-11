@@ -185,7 +185,8 @@ export const ALL_SERVICES_QUERY = defineQuery(`{
     asset->{url}
   },
   subTitle,
-  price
+  price,
+  bgColor,
  },
   "total": count(*[_type == 'service'
                   && defined(slug.current)])
