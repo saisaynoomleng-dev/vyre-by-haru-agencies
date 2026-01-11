@@ -3,11 +3,13 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRef } from 'react';
-import { HomeDesktopServiceSectionProps, ServiceCardProps } from '@/lib/types';
+import { HomeDesktopServiceSectionProps } from '@/lib/types';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { formatCurrency } from '@/lib/utils';
 import Link from 'next/link';
+import { SlideInAnimation } from '@/components/Animations';
+import SectionTitle from '@/components/SectionTitle';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,22 +23,25 @@ const HomeDesktopServiceSection = ({
 
   useGSAP(
     () => {
-      const initialBg = window.getComputedStyle(document.body).backgroundColor;
+      ScrollTrigger.refresh();
+
       const photos = gsap.utils.toArray<HTMLImageElement>('.service-photo');
       const sections = gsap.utils.toArray<HTMLImageElement>('.service-section');
-      gsap.set(photos.slice(1), { yPercent: 200 });
 
-      gsap.to(photos.slice(1), {
+      gsap.set(photos.slice(1), { yPercent: 500 });
+
+      const mainTl = gsap.to(photos.slice(1), {
         yPercent: 0,
         stagger: 1,
         ease: 'none',
         scrollTrigger: {
+          scrub: true,
           trigger: mainContainer.current,
           start: 'top top',
           end: `bottom bottom`,
-          scrub: 2,
           pin: leftContainer.current,
           pinSpacing: false,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -48,14 +53,14 @@ const HomeDesktopServiceSection = ({
           start: 'top center',
           end: 'bottom center',
           onEnter: () => {
-            gsap.to(document.body, {
+            gsap.to(mainContainer.current, {
               backgroundColor: bg,
               duration: 0.8,
               ease: 'power2.out',
             });
           },
           onEnterBack: () => {
-            gsap.to(document.body, {
+            gsap.to(mainContainer.current, {
               backgroundColor: bg,
               duration: 0.8,
               ease: 'power2.out',
@@ -69,32 +74,51 @@ const HomeDesktopServiceSection = ({
         start: 'top bottom',
         end: 'bottom top',
         onLeave: () => {
-          gsap.to(document.body, {
-            backgroundColor: initialBg,
+          gsap.to(mainContainer.current, {
+            backgroundColor: '#f7ede2',
             duration: 0.6,
             ease: 'power2.out',
           });
         },
         onLeaveBack: () => {
-          gsap.to(document.body, {
-            backgroundColor: initialBg,
+          gsap.to(mainContainer.current, {
+            backgroundColor: '#f7ede2',
             duration: 0.6,
             ease: 'power2.out',
           });
         },
       });
+
+      return () => {
+        mainTl.kill();
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+      };
     },
-    { scope: mainContainer },
+    { scope: mainContainer, dependencies: [data] },
   );
 
   return (
     <div
       ref={mainContainer}
       className={clsx(
-        'grid grid-cols-2 justify-between min-h-screen',
+        'grid-cols-2 justify-between min-h-screen py-5 px-10',
         className,
       )}
     >
+      <div className="flex justify-between items-end col-span-full">
+        <SlideInAnimation direction="left" className="text-left md:text-center">
+          <SectionTitle>Services</SectionTitle>
+        </SlideInAnimation>
+        <SlideInAnimation direction="right">
+          <Link
+            href="/services"
+            className="text-fs-300 hover:underline underline-offset-4 hover:text-brand-red"
+          >
+            Check all Services
+          </Link>
+        </SlideInAnimation>
+      </div>
+
       <div
         ref={leftContainer}
         className="h-screen flex flex-col justify-center overflow-hidden"
@@ -102,7 +126,7 @@ const HomeDesktopServiceSection = ({
         <div className="w-[40vw] h-[40vw] rounded-lg overflow-hidden relative">
           {data.services.map((service, i) => (
             <div
-              className="absolute inset-0 shadow-lg overflow-hidden"
+              className="absolute overflow-hidden"
               key={service.slug?.current}
               style={{ zIndex: i }}
             >
@@ -124,8 +148,8 @@ const HomeDesktopServiceSection = ({
         {data.services.map((service) => (
           <div
             key={service.slug?.current}
-            className="min-h-screen flex flex-col justify-center gap-y-3 items-center service-section"
-            data-bg={service.bgColor}
+            className="min-h-screen flex flex-col justify-center gap-y-3 items-center service-section text-center"
+            data-bg={service.bgColor || '#f7ede2'}
           >
             <p className="font-semibold text-fs-600">{service.name}</p>
             <p className="font-semibold text-brand-black/60 text-fs-500">

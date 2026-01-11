@@ -57,8 +57,8 @@ const Header = () => {
         aria-label="Navigation Menu"
         id="main-nav"
         className={clsx(
-          'flex flex-col gap-y-3 fixed inset-0 bg-brand-accent/10 backdrop-blur-2xl pt-15 pl-5 z-20 transition-all duration-400 ease-in-out bottom-[50vh] shadow-2xl shadow-brand-black/50',
-          navOpen ? 'translate-y-0' : '-translate-y-full',
+          'flex flex-col gap-y-3 fixed inset-0 bg-brand-accent/10 backdrop-blur-2xl pt-15 pl-5 z-20 transition-all duration-400 ease-in-out bottom-[40vh] md:bottom-[50vh] shadow-2xl shadow-brand-black/50',
+          navOpen ? 'translate-y-0' : '-translate-y-[200%]',
         )}
       >
         {NAV_LINKS.map((link, i) => (
